@@ -127,6 +127,43 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// ===== Member Card Expand =====
+const memberOverlay = document.getElementById('memberOverlay');
+const overlayAvatar = document.getElementById('overlayAvatar');
+const overlayName = document.getElementById('overlayName');
+const overlayMote = document.getElementById('overlayMote');
+
+document.querySelectorAll('.member-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const avatar = card.querySelector('.member-avatar');
+        const name = card.querySelector('.member-name').textContent;
+        const mote = card.querySelector('.member-mote').textContent;
+
+        overlayAvatar.innerHTML = avatar.innerHTML;
+        overlayName.textContent = name;
+        overlayMote.textContent = mote;
+        memberOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+function closeMemberOverlay() {
+    memberOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+memberOverlay.addEventListener('click', (e) => {
+    if (e.target === memberOverlay) {
+        closeMemberOverlay();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && memberOverlay.classList.contains('active')) {
+        closeMemberOverlay();
+    }
+});
+
 // ===== Smooth Scroll for Anchor Links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

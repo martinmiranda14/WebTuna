@@ -574,10 +574,66 @@ a {
     position: relative;
 }
 
+.member-card {
+    cursor: pointer;
+}
+
 .member-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
     border-color: transparent;
+}
+
+/* Member card expanded overlay */
+.member-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.member-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.member-overlay .member-card-expanded {
+    background: var(--color-bg-section);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px 40px;
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.member-overlay.active .member-card-expanded {
+    transform: scale(1);
+}
+
+.member-overlay .member-avatar {
+    width: 160px;
+    height: 160px;
+    font-size: 3rem;
+    margin: 0 auto 20px;
+}
+
+.member-overlay .member-name {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+.member-overlay .member-mote {
+    font-size: 1.2rem;
 }
 
 .member-avatar {
